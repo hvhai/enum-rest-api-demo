@@ -15,7 +15,12 @@ public class PersonDTO {
     Long id;
     String name;
 
+    @Builder.Default
     Sex sex = Sex.MALE;
+
+    public PersonDTO() {
+        sex= Sex.MALE;
+    }
 
     public enum Sex {
         MALE("Male"), FEMALE("Female");
@@ -29,10 +34,11 @@ public class PersonDTO {
         Sex(String text) {
             this.text = text;
         }
+
         @JsonCreator
         public static Sex of(String value) {
             if (null == value) {
-                return null;
+                return Sex.MALE;
             }
 
             for (Sex item : Sex.values()) {
