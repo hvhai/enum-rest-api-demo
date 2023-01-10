@@ -1,5 +1,8 @@
-package com.codehunter.enumrestapidemo;
+package com.codehunter.enumrestapidemo.controller;
 
+import com.codehunter.enumrestapidemo.Person;
+import com.codehunter.enumrestapidemo.PersonDTO;
+import com.codehunter.enumrestapidemo.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
