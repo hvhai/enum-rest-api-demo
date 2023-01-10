@@ -20,7 +20,6 @@ public class Person {
     @Column(name = "name")
     private String name;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "sex")
     private PersonDTO.Sex sex;
 

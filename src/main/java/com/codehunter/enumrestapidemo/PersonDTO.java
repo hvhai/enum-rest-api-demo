@@ -23,7 +23,7 @@ public class PersonDTO {
 
     public enum Sex {
         MALE("Male"), FEMALE("Female");
-        public final String text;
+        final String text;
 
         @JsonValue
         public String getText() {
