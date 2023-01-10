@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class PersonDTO {
     Long id;
     String name;
@@ -18,9 +20,6 @@ public class PersonDTO {
     @Builder.Default
     Sex sex = Sex.MALE;
 
-    public PersonDTO() {
-        sex= Sex.MALE;
-    }
 
     public enum Sex {
         MALE("Male"), FEMALE("Female");
