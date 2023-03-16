@@ -5,12 +5,14 @@ import com.codehunter.enumrestapidemo.PersonDTO;
 import com.codehunter.enumrestapidemo.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/persons")
@@ -40,4 +42,16 @@ public class PersonController {
                 .sex(newPerson.getSex())
                 .build();
     }
+
+    @PatchMapping
+    public PersonDTO update(Long id, PersonDTO.Sex sexual) {
+        Optional<Person> person = personRepository.findById(id);
+        if (person.isPresent()) {
+            Person updatePerson = person.get();
+            updatePerson.setSex(sexual);
+            return convertToDTO(personRepository.save(updatePerson));
+        }
+        return null;
+    }
+
 }
