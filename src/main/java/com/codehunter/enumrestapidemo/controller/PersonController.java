@@ -3,6 +3,7 @@ package com.codehunter.enumrestapidemo.controller;
 import com.codehunter.enumrestapidemo.Person;
 import com.codehunter.enumrestapidemo.PersonDTO;
 import com.codehunter.enumrestapidemo.PersonRepository;
+import com.codehunter.enumrestapidemo.Sex;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -44,7 +45,7 @@ public class PersonController {
     }
 
     @PatchMapping
-    public PersonDTO update(Long id, PersonDTO.Sex sexual) {
+    public PersonDTO update(Long id, Sex sexual) {
         Optional<Person> person = personRepository.findById(id);
         if (person.isPresent()) {
             Person updatePerson = person.get();

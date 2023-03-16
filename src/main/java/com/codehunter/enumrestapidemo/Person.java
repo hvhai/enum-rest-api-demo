@@ -21,13 +21,13 @@ public class Person {
     private String name;
 
     @Column(name = "sex")
-    private PersonDTO.Sex sex;
+    private Sex sex;
 
-    public PersonDTO.Sex getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(PersonDTO.Sex sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
