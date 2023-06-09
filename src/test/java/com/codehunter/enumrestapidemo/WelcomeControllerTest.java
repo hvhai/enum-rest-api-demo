@@ -1,6 +1,7 @@
 package com.codehunter.enumrestapidemo;
 
 import com.codehunter.enumrestapidemo.controller.WelcomeController;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +33,13 @@ class WelcomeControllerTest {
                 .andExpect(content().string("Hello user-test"));
     }
 
+    @Test
+    void getExceptionTest(){
+        try {
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/welcome/with-exception"))
+                    .andExpect(status().is5xxServerError());
+        } catch (Exception e) {
+            Assertions.fail("Call with exception", e);
+        }
+    }
 }
