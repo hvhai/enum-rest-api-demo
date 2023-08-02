@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -33,5 +34,22 @@ public class EchoController {
             log.error("Error", e);
         }
         return result;
+    }
+
+    @GetMapping(value = "/{id}")
+    public String getEchoWithId(@PathVariable String id) {
+        Object block = echoClient.get()
+                .uri("/get/" + id)
+                .exchangeToMono(clientResponse -> clientResponse.bodyToMono(Object.class))
+                .block();
+        String result = "";
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            result = objectMapper.writeValueAsString(block);
+        } catch (Exception e) {
+            log.error("Error", e);
+        }
+        return result;
+
     }
 }

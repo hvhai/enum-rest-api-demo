@@ -54,6 +54,25 @@ public class WireMockTest {
                 .is2xxSuccessful();
     }
 
+    @Test
+    void testGetEchoWithParam() throws Exception {
+        String id = "my-id";
+        ObjectMapper mapper = new ObjectMapper();
+        String body = mapper.writeValueAsString(new PersonDTO.PersonDTOBuilder().id(1L).name("WireMock with ID name").sex(Sex.MALE).build());
+        wireMockServer.stubFor(
+                WireMock.get("/get/" + id)
+                        .willReturn(aResponse()
+                                .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+                                .withBody(body))
+        );
+
+        this.webTestClient
+                .get()
+                .uri("/api/echos/"+ id)
+                .exchange()
+                .expectStatus()
+                .is2xxSuccessful();
+    }
     @AfterEach
     void afterEach() {
         wireMockServer.resetAll();
